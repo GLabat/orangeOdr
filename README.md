@@ -14,3 +14,14 @@ Result:
     Votre demande a été traitée le : DD-MM-YYYY
     Détail du traitement : ********
     Dossier conforme - Remise sur facture ok le DD/MM/YYYY
+
+TODO
+====
+
+Not sure of the behavior with multiple offers
+
+Licence
+=======
+
+(c) Labat Guillaume, 2013.
+Feel free to use it as you want.
