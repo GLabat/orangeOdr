@@ -1,4 +1,4 @@
 orangeOdr
 =========
 
-Simple script to follow Orange rebate offer
+A simple CasperJS script to follow Orange rebate offer
