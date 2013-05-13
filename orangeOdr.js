@@ -1,6 +1,6 @@
 /**
  * Orange ODR
- *
+ * Labat Guillaume 2013
  */
 
 var accountNumber, casper = require("casper").create({
