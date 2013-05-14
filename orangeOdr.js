@@ -15,26 +15,32 @@ if( casper.cli.args.length === 0 /*&& Object.keys(casper.cli.options).length ===
 accountNumber = casper.cli.get(0);
 
 casper.start('http://www.suiviodr.orange.fr', function() {
-  this.evaluate(function(accountNumber) {
-    var doc = frames[name='main'].document;
-    var form = doc.querySelector('#frm');
-    var inputInternet = doc.querySelector('#cpt_internet').value = accountNumber;
-    form.submit();
-  }, accountNumber);
+  this.withFrame('main', function() {
+    this.fill('#frm', {
+      cpt_internet: accountNumber
+    }, true);
+  });
 });
 
 casper.then(function() {
-  var zoneInfo = this.evaluate(function() {
-    var doc = frames[name='main'].document;
-    var zoneElts = doc.querySelectorAll("div[id^=zone_0]");
-    __utils__.echo('### ' + new Date().toISOString());
-    return Array.prototype.forEach.call(zoneElts, function(zone) {
-      var infoElts = doc.querySelectorAll("div[id^=zone_0] div p.petit_texte_noir_gras");
-      Array.prototype.forEach.call(infoElts, function(i) {
-        __utils__.echo(i.innerText);
-      });
+  this.withFrame('main', function() {
+    this.echo('### ' + new Date().toISOString(), 'INFO');
+
+    // Ugly code
+    this.evaluate(function() {
+      var elements = __utils__.findAll('div[id^=zone_] div p');
+      if( !elements || elements.length === 0 ) {
+        __utils__.echo('No offer');
+        return;
+      }
+
+      Array.prototype.forEach.call(elements, function(element) {
+        __utils__.echo(element.innerText);
+      })
     });
   });
 });
 
-casper.run();
+casper.run(function() {
+  this.exit();
+});
