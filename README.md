@@ -20,7 +20,7 @@ TODO
 
 Not sure of the behavior with multiple offers
 
-Licence
+License
 =======
 
 (c) Labat Guillaume, 2013.
